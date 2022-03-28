@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ElementNode } from "@vue/compiler-core"
 import { computed } from "@vue/reactivity"
 import { provide, ref, unref, watchEffect } from "@vue/runtime-core"
 import { useRoute } from "vue-router"
