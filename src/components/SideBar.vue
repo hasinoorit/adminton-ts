@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "@vue/reactivity"
-import { provide, ref, unref, watchEffect } from "@vue/runtime-core"
+import { provide, ref, unref, watchEffect, nextTick } from "@vue/runtime-core"
 import { useRoute } from "vue-router"
 
 const isFloating = ref(false)
@@ -94,7 +94,12 @@ const mouseLeave = ($e: MouseEvent) => {
       @mouseenter="mouseEnter"
       @mouseleave="mouseLeave"
     >
+      <slot v-if="variant === 'condensed' && !finalFloating" name="cHeader" />
+      <slot v-else name="header" />
       <slot />
+      <div class="flex-grow-1" />
+      <slot v-if="variant === 'condensed' && !finalFloating" name="cFooter" />
+      <slot v-else name="footer" />
     </div>
   </div>
 </template>
@@ -109,39 +114,46 @@ const mouseLeave = ($e: MouseEvent) => {
   z-index: 1;
   display: flex;
   flex-direction: column;
+  --expanded-width: 300px;
+  --condensed-width: 40px;
+  --sb-background: #2c3e50;
+  --sb-active-item-bg: #34495e;
+  --sb-item-color: #bdc3c7;
+  --sb-active-item-color: #ecf0f1;
 }
 .sidebar-condensed {
-  width: 40px;
+  width: var(--condensed-width);
 }
 .sidebar-hidden {
   width: 0px;
 }
 
 .sidebar-expanded {
-  width: 200px;
+  width: var(--expanded-width);
 }
 
 .sidebar-content {
-  --background: #2c3e50;
-  background: var(--background);
+  background: var(--sb-background);
   overflow: hidden;
   height: 100%;
   width: 0px;
   transition: width 0.3s ease;
   z-index: 100;
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar-expanded > .sidebar-content {
-  width: 200px;
+  width: var(--expanded-width);
 }
 .sidebar-hidden > .sidebar-content {
   width: 0px;
 }
 .sidebar-condensed > .sidebar-content {
-  width: 40px;
+  width: var(--condensed-width);
 }
 .sidebar-container.sidebar-floating > .sidebar-content {
-  width: 200px;
+  width: var(--expanded-width);
 }
 </style>

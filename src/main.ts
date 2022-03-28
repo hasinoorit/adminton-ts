@@ -11,16 +11,13 @@ import "primeicons/primeicons.css"
 import "primeflex/primeflex.css"
 
 const app = createApp(AppVue)
-app.use(installAxios)
 app.use(PrimeVue)
 const pinia = createPinia()
-app.use(pinia)
-pinia.use(appForPinia)
+// app.use(pinia)
+// pinia.use(appForPinia)
 const router = createRouter(app)
 app.use(router)
-app.use(installAxios)
+// app.use(installAxios)
 // No api/router/store call is allowed before this line
-
-console.log(app)
 
 router.isReady().then(async () => app.mount("#app"))

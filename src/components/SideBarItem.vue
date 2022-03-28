@@ -44,9 +44,7 @@ const hasChild = computed(() => slots.default && slots.default().length > 0)
   <div :class="{ 'sb-item': true, active: isActive }" ref="itemBlock">
     <a v-if="hasChild" :href="to" @click.prevent class="sb-item--header" ref="itemHeaderEl">
       <div class="sb-item--icon" v-if="slots.icon">
-        <slot name="icon">
-          <i class="condensed-icon">{{ title[0] }}</i>
-        </slot>
+        <slot name="icon" />
       </div>
       <div class="sb-item--title">{{ title }}</div>
       <div class="sb-item--indicator" v-if="hasChild">
@@ -83,6 +81,7 @@ const hasChild = computed(() => slots.default && slots.default().length > 0)
 .sb-item {
   padding: 0;
   margin-top: 3px;
+  text-decoration: none;
 }
 
 .sb-item--header {
@@ -90,19 +89,22 @@ const hasChild = computed(() => slots.default && slots.default().length > 0)
   flex-shrink: 1;
   flex-direction: row;
   gap: 1rem;
-  color: #bdc3c7;
+  color: var(--sb-item-color);
   transition: all 0.3s ease;
   padding: 3px 12px;
   min-height: 36px;
+  text-decoration: none;
+  font-size: 1.1rem;
 }
 .sb-item.active > .sb-item--header,
 .sb-item--header:hover {
-  color: #ecf0f1;
-  background: #34495e;
+  color: var(--sb-active-item-color);
+  background: var(--sb-active-item-bg);
 }
 .sb-item--title {
   flex-grow: 1;
   align-self: center;
+  transition: font-weight 0.3s ease;
 }
 .sb-item--icon {
   align-self: center;
@@ -128,7 +130,7 @@ const hasChild = computed(() => slots.default && slots.default().length > 0)
 }
 .sb-item--child {
   margin-left: 0px;
-  border-left: 0px solid white;
+  border-left: 0px solid transparent;
   transition: all 0.3s ease;
 }
 .sidebar-container:not(.sidebar-condensed:not(.sidebar-floating))
@@ -136,6 +138,14 @@ const hasChild = computed(() => slots.default && slots.default().length > 0)
   height: v-bind(childHeight);
   overflow: hidden;
   margin-left: 10px;
-  border-left: 1px solid white;
+  border-left: 1px solid var(--sb-active-item-color);
+}
+.sidebar-condensed:not(.sidebar-floating) .sb-item--title:not(:nth-child(2)) {
+  font-size: 0rem;
+}
+.sidebar-condensed:not(.sidebar-floating)
+  .sb-item--title:not(:nth-child(2))::first-letter {
+  font-size: 1.1rem !important;
+  font-weight: bold;
 }
 </style>
