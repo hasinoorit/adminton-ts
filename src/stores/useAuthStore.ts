@@ -24,7 +24,7 @@ const authStore = defineStore("authStore", {
   },
   actions: {
     getAuth() {
-      this
+      console.log(this.$app.config.globalProperties)
     },
   },
 })
