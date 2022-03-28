@@ -1,11 +1,6 @@
 import { App } from "vue"
 import { defineStore } from "pinia"
-declare module "pinia" {
-  export interface PiniaCustomStateProperties<S> {
-    app: App
-  }
-}
-
+import "pinia"
 interface AuthInterface {
   username: string
   role: string
@@ -24,7 +19,9 @@ const authStore = defineStore("authStore", {
   },
   actions: {
     getAuth() {
-      this
+      this.$app.config.globalProperties.$http.get("", {
+        params:{}
+      })
     },
   },
 })
