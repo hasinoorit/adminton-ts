@@ -1,28 +1,24 @@
+import axios, { AxiosInstance } from "axios"
 import { App } from "vue"
-import axiosLib, { AxiosInstance } from "axios"
-import { Router } from "vue-router"
-import { Pinia } from "pinia"
 
-/**
- * Type support added for ComponentCustomProperties
- */
+let $app: App
+let $http: AxiosInstance | null = null
 
+const $createHttp = (): AxiosInstance => {
+  return axios.create({})
+}
 declare module "vue" {
-  export interface ComponentCustomProperties {
+  interface ComponentCustomProperties {
     $http: AxiosInstance
-    $router: Router
-    $pinia: Pinia
   }
 }
 
-let $app: App
-
-const axios = axiosLib.create()
-
 export const installAxios = {
   install(app: App) {
-    app.config.globalProperties.$http = axios
+    $app = app
+    $http = $createHttp()
+    app.config.globalProperties.$http = $http
   },
 }
 
-export default axios
+export default $http
