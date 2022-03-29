@@ -128,17 +128,18 @@ const hasChild = computed(() => slots.default && slots.default().length > 0)
 .slide-leave-to {
   height: 0;
 }
+.slide-enter-to,
+.slide-leave-from {
+  height: v-bind(childHeight);
+}
 .sb-item--child {
   margin-left: 0px;
-  border-left: 0px solid transparent;
   transition: all 0.3s ease;
 }
 .sidebar-container:not(.sidebar-condensed:not(.sidebar-floating))
   .sb-item--child {
-  height: v-bind(childHeight);
   overflow: hidden;
   margin-left: 10px;
-  border-left: 1px solid var(--sb-active-item-color);
 }
 .sidebar-condensed:not(.sidebar-floating) .sb-item--title:not(:nth-child(2)) {
   font-size: 0rem;

@@ -60,7 +60,12 @@ const items = ref([
         <template #icon>
           <i class="pi pi-info-circle"></i>
         </template>
-        <SideBarItem title="Team" to="/about/team"></SideBarItem>
+        <SideBarItem title="About" to="/about">
+          <template #icon>
+            <i class="pi pi-info-circle"></i>
+          </template>
+          <SideBarItem title="Team" to="/about/team"></SideBarItem>
+        </SideBarItem>
       </SideBarItem>
       <template #footer>
         <h1 style="color: aliceblue;">Dashboard</h1>
