@@ -94,12 +94,15 @@ const mouseLeave = ($e: MouseEvent) => {
       @mouseenter="mouseEnter"
       @mouseleave="mouseLeave"
     >
-      <slot v-if="variant === 'condensed' && !finalFloating" name="cHeader" />
-      <slot v-else name="header" />
-      <slot />
-      <div class="flex-grow-1" />
-      <slot v-if="variant === 'condensed' && !finalFloating" name="cFooter" />
-      <slot v-else name="footer" />
+      <div class="sidebar-header">
+        <slot name="header" :sbVariant="variant" :sbFloating="finalFloating" />
+      </div>
+      <div class="sidebar-fill">
+        <slot />
+      </div>
+      <div class="sidebar-footer">
+        <slot name="footer" :sbVariant="variant" :sbFloating="finalFloating" />
+      </div>
     </div>
   </div>
 </template>
@@ -121,6 +124,11 @@ const mouseLeave = ($e: MouseEvent) => {
   --sb-item-color: #bdc3c7;
   --sb-active-item-color: #ecf0f1;
 }
+
+.sidebar-fill {
+  flex-grow: 1;
+}
+
 .sidebar-condensed {
   width: var(--condensed-width);
 }
@@ -130,6 +138,14 @@ const mouseLeave = ($e: MouseEvent) => {
 
 .sidebar-expanded {
   width: var(--expanded-width);
+}
+
+.sidebar-header,
+.sidebar-footer {
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  position: relative;
 }
 
 .sidebar-content {
@@ -155,5 +171,28 @@ const mouseLeave = ($e: MouseEvent) => {
 }
 .sidebar-container.sidebar-floating > .sidebar-content {
   width: var(--expanded-width);
+}
+/* Transition */
+.slide-right-enter-active,
+.slide-right-leave-active,
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-left-enter {
+  transform: translateX(100%);
+}
+
+.slide-left-leave-to {
+  transform: translateX(-100%);
+}
+
+.slide-right-enter {
+  transform: translateX(-100%);
+}
+
+.slide-right-leave-to {
+  transform: translateX(100%);
 }
 </style>
