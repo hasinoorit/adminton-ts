@@ -2,11 +2,12 @@ import axios, { AxiosInstance } from "axios"
 import { App } from "vue"
 
 let $app: App
-let $http: AxiosInstance | null = null
 
 const $createHttp = (): AxiosInstance => {
   return axios.create({})
 }
+let $http: AxiosInstance = $createHttp()
+
 declare module "vue" {
   interface ComponentCustomProperties {
     $http: AxiosInstance
