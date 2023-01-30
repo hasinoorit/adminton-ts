@@ -4,6 +4,7 @@ import Menu from "primevue/menu"
 import Button from "primevue/button"
 import Sidebar from "../SideBar.vue"
 import SideBarItem from "../SideBarItem.vue"
+import Breadcrumb from "../Breadcrumb.vue"
 // import useAuthStore from "../../stores/useAuthStore"
 import { useToast } from "primevue/usetoast"
 // const auth = useAuthStore()
@@ -12,6 +13,20 @@ const auth = { username: "Hasinoor" }
 const toast = useToast()
 const menu = ref()
 const variant = ref("expanded")
+const variants = [
+  {
+    title: "Expanded",
+    value: "expanded",
+  },
+  {
+    title: "Condensed",
+    value: "condensed",
+  },
+  {
+    title: "Hidden",
+    value: "hidden",
+  },
+]
 const floating = ref(false)
 const options = ["expanded", "condensed", "hidden"]
 const items = ref([
@@ -44,9 +59,15 @@ const items = ref([
 <template>
   <div class="flex">
     <Sidebar :variant="variant" v-model:floating="floating">
-      <template #header="{ sbVariant, sbFloating }: { sbVariant: string; sbFloating: Boolean }">
+      <template #header="{ sbVariant, sbFloating }: any">
         <div
-          style="height: 60px; overflow: hidden; display: flex; align-items: center; justify-content: center;"
+          style="
+            height: 60px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
         >
           <transition
             enterActiveClass="animate__animated animate__slideInLeft"
@@ -55,7 +76,9 @@ const items = ref([
             <h1
               v-if="sbVariant !== 'condensed' || sbFloating === true"
               class="sidebar-header-title"
-            >Dashboard</h1>
+            >
+              Dashboard
+            </h1>
           </transition>
           <transition
             enterActiveClass="animate__animated animate__slideInRight"
@@ -64,13 +87,45 @@ const items = ref([
             <h1
               v-if="sbVariant === 'condensed' && sbFloating === false"
               class="sidebar-header-title"
-            >A</h1>
+            >
+              A
+            </h1>
           </transition>
         </div>
       </template>
       <SideBarItem title="Home" exactActive to="/">
         <template #icon>
           <i class="pi pi-home"></i>
+        </template>
+      </SideBarItem>
+      <SideBarItem title="Supplier" :exactActive="false" to="/supplier">
+        <template #icon>
+          <i class="pi pi-id-card"></i>
+        </template>
+      </SideBarItem>
+      <SideBarItem title="Materials" :exactActive="false" to="/raw">
+        <template #icon>
+          <i class="pi pi-shield"></i>
+        </template>
+      </SideBarItem>
+      <SideBarItem title="Employee" :exactActive="false" to="/employee">
+        <template #icon>
+          <i class="pi pi-users"></i>
+        </template>
+      </SideBarItem>
+      <SideBarItem title="Products" :exactActive="false" to="/products">
+        <template #icon>
+          <i class="pi pi-database"></i>
+        </template>
+      </SideBarItem>
+      <SideBarItem title="Orders" :exactActive="false" to="/orders">
+        <template #icon>
+          <i class="pi pi-shopping-bag"></i>
+        </template>
+      </SideBarItem>
+      <SideBarItem title="Accounts" :exactActive="false" to="/accounts">
+        <template #icon>
+          <i class="pi pi-chart-bar"></i>
         </template>
       </SideBarItem>
       <SideBarItem title="Contact" exactActive to="/" />
@@ -82,12 +137,9 @@ const items = ref([
           <template #icon>
             <i class="pi pi-info-circle"></i>
           </template>
-          <SideBarItem title="Team" to="/about/team"></SideBarItem>
+          <SideBarItem title="Team" to="/about/full-stack/hasinoor"></SideBarItem>
         </SideBarItem>
       </SideBarItem>
-      <template #footer="{ sbVariant, sbFloating }: { sbVariant: string; sbFloating: Boolean }">
-        <h1 style="color: aliceblue;" class="sidebar-header">Dashboard</h1>
-      </template>
     </Sidebar>
     <div class="flex-grow-1 flex flex-column">
       <div class="top-nav-bg">
@@ -97,15 +149,32 @@ const items = ref([
             icon="pi pi-user"
             class="p-button-rounded p-button-info p-button-outlined"
           />
-          <Menu id="overlay_menu" class="mt-2" ref="menu" :model="items" :popup="true" />
+          <Menu
+            id="overlay_menu"
+            class="mt-2"
+            ref="menu"
+            :model="items"
+            :popup="true"
+          />
         </div>
       </div>
-      <div class="flex-grow-1 p-3">
-        <button v-if="variant === 'hidden'" @click="floating = !floating">toggle</button>
-        <select v-model="variant">
-          <option v-for="option in options" :key="option" :value="option">{{ option }}</option>
-        </select>
-        <slot />
+      <div class="flex-grow-1">
+        <div class="p-4">
+          <span class="p-float-label">
+            <Dropdown
+              :options="variants"
+              optionValue="value"
+              optionLabel="title"
+              v-model="variant"
+              placeholder="Sidebar Variant"
+              id="dropdown"
+            ></Dropdown
+            ><label for="dropdown">Sidebar Variant</label></span
+          >
+
+          <Breadcrumb />
+          <slot />
+        </div>
       </div>
     </div>
   </div>
@@ -114,6 +183,9 @@ const items = ref([
 .top-nav-bg {
   background-color: #ecf0f1;
   padding: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 .sidebar-header-title {
   color: aliceblue;

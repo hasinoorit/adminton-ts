@@ -1,19 +1,145 @@
-<script setup lang="ts">
-import Card from "primevue/card"
-import { ref } from "vue"
-const card = ref()
-const isOpen = ref(true)
-</script>
+<script setup lang="ts"></script>
 <template>
-  <h1>Home page</h1>
-  <Card style="margin: auto auto" ref="card">
-    <template #title>Adminton</template>
-    <template #content>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis facere molestiae
-        eos deleniti, a tenetur repellendus atque labore sequi nobis quasi vel
-        perspiciatis provident voluptatibus reiciendis eveniet ratione sunt laborum!
-      </p>
-    </template>
-  </Card>
+  <div
+    style="display: grid; grid-template-columns: repeat(3, [col-start] 1fr); gap: 1rem"
+  >
+    <Card>
+      <template #title>Balance</template>
+      <template #content>
+        <table>
+          <tr>
+            <td>Balance</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td>Due to Supplier</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td>Due to Dealers</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </template>
+    </Card>
+    <Card>
+      <template #title>Product Orders</template>
+      <template #content>
+        <table>
+          <tr>
+            <td>Balance</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td>Due to Supplier</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td>Due to Dealers</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </template>
+    </Card>
+    <Card>
+      <template #title>Product Stocks</template>
+      <template #content>
+        <table>
+          <tr>
+            <td>Balance</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td>Due to Supplier</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td>Due to Dealers</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </template>
+    </Card>
+    <Card>
+      <template #title>Material Orders</template>
+      <template #content>
+        <table>
+          <tr>
+            <td>Balance</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td>Due to Supplier</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td>Due to Dealers</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </template>
+    </Card>
+    <Card>
+      <template #title>Material Stocks</template>
+      <template #content>
+        <table>
+          <tr>
+            <td>Balance</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td>Due to Supplier</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td>Due to Dealers</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </template>
+    </Card>
+    <Card>
+      <template #title>Replacement</template>
+      <template #content>
+        <table>
+          <tr>
+            <td>Balance</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td>Due to Supplier</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td>Due to Dealers</td>
+            <td>0.00</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </template>
+    </Card>
+  </div>
 </template>

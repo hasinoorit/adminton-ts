@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "@vue/reactivity"
-import { provide, ref, unref, watchEffect, nextTick } from "@vue/runtime-core"
+import { provide, ref, unref, watchEffect } from "@vue/runtime-core"
 import { useRoute } from "vue-router"
 
 const isFloating = ref(false)
@@ -84,7 +84,6 @@ const mouseLeave = ($e: MouseEvent) => {
       'sidebar-condensed': props.variant === 'condensed',
       'sidebar-hidden': props.variant === 'hidden',
       'sidebar-floating': finalFloating,
-    
     }"
     ref="sidebarEl"
   >
@@ -112,9 +111,11 @@ const mouseLeave = ($e: MouseEvent) => {
   padding: 0;
   min-height: 100vh;
   height: 100%;
+  position: sticky;
+  top: 0;
   width: 0;
   transition: all 0.3s ease;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   --expanded-width: 300px;

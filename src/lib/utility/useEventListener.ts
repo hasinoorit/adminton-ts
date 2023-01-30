@@ -161,7 +161,7 @@ export function useEventListener(...args: any[]) {
   }
 
   tryOnScopeDispose(stop)
-
+  
   return stop
 }
 
